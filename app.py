@@ -21,7 +21,7 @@ def index():
     if request.method =='POST':
         task_content = request.form['content']
         task_status = request.form['status']
-        new_task = Todo(content=task_content)
+        new_task = Todo(content=task_content, status=task_status)
 
         try:
             db.session.add(new_task)
@@ -51,6 +51,7 @@ def update(id):
     task = Todo.query.get_or_404(id)
     if request.method == 'POST':
         task.content = request.form['content']
+        task.status = request.form['status']
         try:
             db.session.commit()
             return redirect('/')
