@@ -9,6 +9,7 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
+    status = db.Column(db.String(150), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -19,6 +20,7 @@ class Todo(db.Model):
 def index():
     if request.method =='POST':
         task_content = request.form['content']
+        task_status = request.form['status']
         new_task = Todo(content=task_content)
 
         try:
